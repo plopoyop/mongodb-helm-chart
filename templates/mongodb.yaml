@@ -1,0 +1,30 @@
+apiVersion: mongodbcommunity.mongodb.com/v1
+kind: MongoDBCommunity
+metadata:
+  name: {{ .Values.name }}
+spec:
+  members: {{ .Values.members }}
+  type: {{ .Values.type }}
+  version: {{ .Values.version }}
+  persistent: {{ .Values.persistent }}
+  security:
+    authentication:
+      modes: ["SCRAM"]
+  users:
+    - name: {{ .Values.user.name }}
+      db: {{ .Values.user.db }}
+      passwordSecretRef:
+        name: {{ .Values.user.passwordSecretRef }}
+      roles:
+      {{- range .Values.user.roles }}
+          - name: {{ .name }}
+            db: {{ .db }}
+      {{- end}}
+      {{ if .Values.scramCredentialsSecretName }}
+      scramCredentialsSecretName: {{ .Values.scramCredentialsSecretName }}
+      {{ end }}
+      {{ if .Values.connectionStringSecretName }}
+      connectionStringSecretName: {{ .Values.connectionStringSecretName }}
+      {{ end }}
+  additionalMongodConfig:
+    storage.wiredTiger.engineConfig.journalCompressor: zlib

@@ -1,0 +1,21 @@
+name: example-mongodb
+members: 3
+type: ReplicaSet
+version: "4.4.6"
+persistent: true
+adminPassword: change-me
+user:
+  name: admin
+  db: admin
+  passwordSecretRef: mongo-admin-password
+  roles:
+    - name: clusterAdmin
+      db: admin
+    - name: userAdminAnyDatabase
+      db: admin
+    - name: dbAdminAnyDatabase
+      db: admin
+    - name: readWriteAnyDatabase
+      db: admin
+scramCredentialsSecretName: ""
+connectionStringSecretName: ""
