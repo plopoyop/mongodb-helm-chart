@@ -17,7 +17,7 @@ spec:
     - name: {{ .Values.user.name }}
       db: {{ .Values.user.db }}
       passwordSecretRef:
-        name: {{ .Values.user.passwordSecretRef }}
+        name: {{ include "mongodb.fullname" . }}-{{ .Values.user.passwordSecretRef }}
       roles:
       {{- range .Values.user.roles }}
           - name: {{ .name }}

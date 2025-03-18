@@ -1,0 +1,35 @@
+---
+suite: Mongodb replicat configuration
+templates:
+  - mongodb.yaml
+tests:
+  - it: should provide expected defaults
+    asserts:
+      - equal:
+          path: spec.members
+          value: 3
+      - equal:
+          path: spec.type
+          value: "ReplicaSet"
+      - equal:
+          path: spec.version
+          value: "4.4.6"
+      - equal:
+          path: spec.persistent
+          value: true
+      - equal:
+          path: spec.users[0].name
+          value: admin
+      - equal:
+          path: spec.users[0].db
+          value: admin
+      - equal:
+          path: spec.users[0].passwordSecretRef.name
+          value: RELEASE-NAME-mongodb-mongo-admin-password
+      - equal:
+          path: spec.users[0].roles
+          value:
+            - {name: clusterAdmin, db: admin}
+            - {name: userAdminAnyDatabase, db: admin}
+            - {name: dbAdminAnyDatabase, db: admin}
+            - {name: readWriteAnyDatabase, db: admin}
