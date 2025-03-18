@@ -1,4 +1,5 @@
 mongodb-*.tgz
+.task
 .env
 
 # Devenv

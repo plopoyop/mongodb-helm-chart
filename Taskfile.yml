@@ -1,0 +1,52 @@
+---
+version: '3'
+
+dotenv: ['.env']
+
+vars:
+  CHART_VERSION:
+    sh: helm show chart . | yq -r '.version'
+  CHART_NAME: mongodb
+
+tasks:
+  default:
+    cmds:
+      - task -l
+    silent: true
+
+  prepare:
+    desc: "Prepare development environment"
+    cmds:
+      - task: pre-commit
+
+  pre-commit:
+    desc: "Install pre-commit hooks"
+    cmds:
+      - pre-commit install
+    sources:
+      - .git/hooks/pre-commit
+      - .pre-commit-config.yaml
+    generates:
+      - .git/hooks/pre-commit
+    method: checksum
+
+  check:
+    desc: "Run pre-commit hooks"
+    cmds:
+      - pre-commit run -a
+
+  lint:
+    desc: "Run lint"
+    cmds:
+      - helm lint .
+
+  package:
+    cmds:
+      - echo {{.CHART_VERSION}}
+      - helm package .
+    sources:
+      - templates/**/*
+      - Chart.yaml
+      - values.yaml
+    generates:
+      - "{{.CHART_NAME}}-{{.CHART_VERSION}}.tgz"
