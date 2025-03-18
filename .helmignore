@@ -21,3 +21,9 @@
 .idea/
 *.tmproj
 .vscode/
+
+.devenv*
+devenv.local.nix
+
+# direnv
+.direnv
