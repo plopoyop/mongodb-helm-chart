@@ -1,7 +1,8 @@
+---
 apiVersion: mongodbcommunity.mongodb.com/v1
 kind: MongoDBCommunity
 metadata:
-  name: {{ .Values.name }}
+  name: {{ include "mongodb.fullname" . }}
 spec:
   members: {{ .Values.members }}
   type: {{ .Values.type }}
