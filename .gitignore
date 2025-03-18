@@ -8,3 +8,7 @@ devenv.local.nix
 
 # direnv
 .direnv
+
+
+# tests
+__snapshot__

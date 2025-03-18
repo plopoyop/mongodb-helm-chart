@@ -40,6 +40,11 @@ tasks:
     cmds:
       - helm lint .
 
+  tests:unit:
+    desc: "Run unit tests"
+    cmds:
+      - helm unittest .
+
   package:
     cmds:
       - echo {{.CHART_VERSION}}
