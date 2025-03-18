@@ -33,3 +33,70 @@ tests:
             - {name: userAdminAnyDatabase, db: admin}
             - {name: dbAdminAnyDatabase, db: admin}
             - {name: readWriteAnyDatabase, db: admin}
+  - it: should have the specified members number
+    set:
+      members: 1
+    asserts:
+      - equal:
+          path: spec.members
+          value: 1
+  - it: should have the specified version and feature compatibility version
+    set:
+      version: "8.0.4"
+      featureCompatibilityVersion: "8.0"
+    asserts:
+      - equal:
+          path: spec.version
+          value: "8.0.4"
+      - equal:
+          path: spec.featureCompatibilityVersion
+          value: "8.0"
+  - it: should set secrets names
+    set:
+      scramCredentialsSecretName: "scram-secret"
+      connectionStringSecretName: "connection-string-secret"
+    asserts:
+      - equal:
+          path: spec.users[0].scramCredentialsSecretName
+          value: "scram-secret"
+      - equal:
+          path: spec.users[0].connectionStringSecretName
+          value: "connection-string-secret"
+  - it: should handle user modification
+    set:
+      user:
+        name: notadmin
+        db: authdb
+        passwordSecretRef: mongo-notadmin-password
+    asserts:
+      - equal:
+          path: spec.users[0].name
+          value: notadmin
+      - equal:
+          path: spec.users[0].db
+          value: authdb
+      - equal:
+          path: spec.users[0].passwordSecretRef.name
+          value: RELEASE-NAME-mongodb-mongo-notadmin-password
+
+  - it: should handle multiple user roles
+    set:
+      user:
+        roles:
+          - name: "readWrite"
+            db: "admin"
+          - name: "dbAdmin"
+            db: "admin"
+    asserts:
+      - equal:
+          path: spec.users[0].roles[0].name
+          value: "readWrite"
+      - equal:
+          path: spec.users[0].roles[0].db
+          value: "admin"
+      - equal:
+          path: spec.users[0].roles[1].name
+          value: "dbAdmin"
+      - equal:
+          path: spec.users[0].roles[1].db
+          value: "admin"

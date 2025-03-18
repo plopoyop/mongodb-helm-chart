@@ -9,6 +9,9 @@ spec:
   members: {{ .Values.members }}
   type: "ReplicaSet"
   version: {{ .Values.version }}
+{{- if .Values.featureCompatibilityVersion }}
+  featureCompatibilityVersion: "{{ .Values.featureCompatibilityVersion }}"
+{{- end }}
   persistent: {{ .Values.persistent }}
   security:
     authentication:
