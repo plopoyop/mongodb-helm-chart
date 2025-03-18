@@ -3,6 +3,8 @@ kind: RoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
   name: {{ include "mongodb.fullname" . }}-database-rbac
+  labels:
+  {{- include "mongodb.labels" . | nindent 4 }}
 subjects:
   - kind: ServiceAccount
     name: {{ include "mongodb.serviceAccountName" . }}
