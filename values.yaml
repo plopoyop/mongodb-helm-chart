@@ -1,6 +1,5 @@
 name: example-mongodb
 members: 3
-type: ReplicaSet
 version: "4.4.6"
 persistent: true
 adminPassword: change-me
