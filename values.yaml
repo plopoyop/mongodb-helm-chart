@@ -31,3 +31,6 @@ logVolumeStorage: "2Gi"
 additionalMongodConfig: {}
 additionalConnectionStringConfig: {}
 containersAdditionalConfig: {}
+
+metrics:
+  enabled: false

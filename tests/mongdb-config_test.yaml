@@ -184,3 +184,17 @@ tests:
       - equal:
           path: spec.statefulSet.spec.template.spec.containers[1].readinessProbe
           value: { failureThreshold: 40, initialDelaySeconds: 5, timeout: 60}
+
+  - it: should correctly apply metrics if enabled
+    set:
+      metrics:
+        enabled: true
+        username: "user"
+        passwordSecretRef: "passSecretRef"
+    asserts:
+      - equal:
+          path: spec.prometheus.username
+          value: "user"
+      - equal:
+          path: spec.prometheus.passwordSecretRef.name
+          value: "RELEASE-NAME-mongodb-passSecretRef"

@@ -1,3 +1,4 @@
+{{- $fullName := include "mongodb.fullname" . -}}
 ---
 apiVersion: mongodbcommunity.mongodb.com/v1
 kind: MongoDBCommunity
@@ -71,3 +72,12 @@ spec:
     {{- with .Values.additionalConnectionStringConfig }}
     {{- toYaml . | nindent 4 }}
     {{- end }}
+
+{{- if .Values.metrics.enabled -}}
+{{- with .Values.metrics }}
+  prometheus:
+    username: {{ .username }}
+    passwordSecretRef:
+      name: "{{ $fullName }}-{{ .passwordSecretRef }}"
+{{- end }}
+{{- end }}
