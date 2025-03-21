@@ -23,7 +23,6 @@ serviceAccount:
   create: true
   automount: true
   annotations: {}
-  name: ""
 
 dataVolumeStorage: "10Gi"
 logVolumeStorage: "2Gi"
