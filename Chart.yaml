@@ -1,15 +1,15 @@
 ---
-apiVersion: v2
-name: mongodb
-description: A Helm chart to deploy Mongodb replicatsets with official community
+apiVersion: "v2"
+name: "mongodb"
+description: "A Helm chart to deploy Mongodb replicatsets with official community"
 keywords:
-- mongodb
-- database
-- nosql
+- "mongodb"
+- "database"
+- "nosql"
 
-icon: https://mongodb-images-new.s3.eu-west-1.amazonaws.com/leaf-green-dark.png
-type: application
+icon: "https://mongodb-images-new.s3.eu-west-1.amazonaws.com/leaf-green-dark.png"
+type: "application"
 
-version: 0.1.0
+version: "0.1.0"
 
 appVersion: "0.12.0"
