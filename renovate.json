@@ -1,0 +1,29 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended",
+    ":dependencyDashboard"
+  ],
+  "packageRules": [
+    {
+      "matchDatasources": ["helm"],
+      "matchPackageNames": ["community-operator"],
+      "registryUrls": ["https://mongodb.github.io/helm-charts"]
+    }
+  ],
+  "customManagers": [
+    {
+      "customType": "regex",
+      "fileMatch": [
+        "^Chart.yaml$",
+        "^README.md$"
+      ],
+      "matchStrings": [
+        "appVersion:\\s*\"(?<currentValue>[0-9\\.]+)\""
+      ],
+      "depNameTemplate": "community-operator",
+      "autoReplaceStringTemplate": "appVersion: \"{{newValue}}\"",
+      "datasourceTemplate": "helm"
+    }
+  ]
+}
