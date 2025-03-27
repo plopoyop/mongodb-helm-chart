@@ -30,3 +30,9 @@ devenv.local.nix
 
 .task
 .env
+
+.pre-commit-config.yaml
+
+.github/
+
+tests/
