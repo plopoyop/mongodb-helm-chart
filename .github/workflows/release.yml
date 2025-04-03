@@ -90,7 +90,7 @@ jobs:
         with:
           token: ${{ secrets.RELEASE_TOKEN }}
           charts_dir: "../"
-          charts_url: "https://plopoyop.github.io/charts"
+          charts_url: "https://plopoyop.github.io/"
           owner: "plopoyop"
           repository: "plopoyop.github.io"
           branch: "main"
