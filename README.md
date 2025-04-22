@@ -231,7 +231,7 @@ apiVersion: v2
 name: mongodb
 version: "0.1.0"
 description: A Helm chart for deploying MongoDB on Kubernetes
-appVersion: "0.12.1"
+appVersion: "0.13.0"
 maintainers:
 ```
 
