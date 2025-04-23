@@ -17,5 +17,3 @@ tests:
             app.kubernetes.io/instance: RELEASE-NAME
             app.kubernetes.io/managed-by: Helm
             app.kubernetes.io/name: mongodb
-            app.kubernetes.io/version: 0.12.0
-            helm.sh/chart: mongodb-0.1.0
